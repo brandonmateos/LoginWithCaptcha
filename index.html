@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login with captcha</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <!-- Font Awesome para iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js'
+        integrity='sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=='
+        crossorigin='anonymous'></script>
+    <script src="captcha.js"></script>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title text-center mb-4">Iniciar sesión</h1>
+
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <label for="usuario">Usuario</label>
+                                <input type="text" class="form-control" name="usuario" id="usuario" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contraseña">Contraseña</label>
+                                <input type="password" class="form-control" name="contraseña" id="contraseña" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="captcha-input">Ingrese el captcha</label>
+                                <div>
+                                    <span id="captcha"></span>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Ingresa el captcha"
+                                        aria-label="Captcha" name="captcha-form" id="captcha-input" required>
+                                    <button class="btn btn-outline-secondary captcha-refresh" type="button"
+                                        id="captcha-refresh">
+                                        <i class="fas fa-sync"></i>
+                                    </button>
+                                </div>
+                            </div>
+                    </div>
+
+                    <form id="loginForm">
+                        <!-- Tus campos de formulario van aquí -->
+                        <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+                    </form>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#loginForm").submit(function (event) {
+                event.preventDefault();
+                var usuario = $("#usuario").val();
+                var contraseña = $("#contraseña").val();
+                var captcha = $("#captcha-input").val();
+
+                // Valida el captcha
+                if (captcha !== $("#captcha").text()) {
+                    // Muestra el mensaje de error si el captcha es incorrecto
+                    $(".modal-title").html("<i class='fas fa-times-circle'></i> Error de validación");
+                    $(".modal-body").html("<p>Captcha incorrecto. Por favor, inténtalo de nuevo.</p>");
+                    $("#myModal").modal("show");
+                } else {
+                    // Muestra el mensaje de éxito si todo es correcto
+                    $(".modal-title").html("<i class='fas fa-check-circle'></i> Conexión exitosa");
+                    $(".modal-body").html("<p>¡Bienvenido! Has iniciado sesión correctamente.</p>");
+                    $("#myModal").modal("show");
+                }
+            });
+        });
+
+    </script>
+    <div class="modal" tabindex="-1" id="myModal">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-check-circle"></i>
+                        Conexión exitosa
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¡Bienvenido! Has iniciado sesión correctamente.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i>
+                        Cerrar</button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
