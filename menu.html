@@ -9,11 +9,17 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <title>Main Screen</title>
     </head>
+    <script>
+        //Si no hay local storage, redirige a la página de login
+        if (localStorage.getItem('username') === null) {
+            window.location.href = 'index.html';
+        }
+    </script>
     <body>
         <main class="flex justify-center items-center h-screen">
             <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
                 <main class="space-y-6">
-                    <h5 class="text-xl font-medium text-gray-900 dark:text-white">Pues ya está!</h5>
+                    <h5 class="text-xl font-medium text-gray-900 dark:text-white">Pues jóvenes esta monda, funciona con localstorage</h5>
                     <div>
                         <button onclick="logout()" id="logoutButton" class="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                             Cerrar Sesión

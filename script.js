@@ -14,6 +14,8 @@ $(document).ready(function() {
         userInput.password = $("#password").val();
         if (captchaResponse.length != 0 && userValidation(userInput, account)) {
             windowRedirection("./menu.html");
+            //Crear localStorage
+            localStorage.setItem("username", userInput.username);
         } else {
             windowRedirection("./index.html");
         }
@@ -35,6 +37,7 @@ $(document).ready(function() {
     }
 
     $("#logoutButton").click(function() {
+        localStorage.clear();
         windowRedirection("./index.html");
     });
 
